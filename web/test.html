@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>500 Sliders!</title>
+
+<meta name="description" content="A silly little website with 500 sliders. Move one slider and the 499 others will react - predicting your answers.">
+<meta name="keywords" content="personality quiz, personality test, machine learning, sparse autoencoder, interactive sliders, openpsychometrics, neural network, machine learning">
+<meta name="author" content="Qualia">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="500 Sliders! Interactive Personality Predictor">
+<meta property="og:description" content="Move one slider and the 499 others will react - predicting your answers. Made by Qualia :3">
+<meta property="og:image" content="./og-image.png">
+
+<link rel="icon" type="image/x-icon" href="./fav.ico">
+
+<link rel="stylesheet" href="./style.css">
+<script type="modulepreload" src="./feature_names.js"></script>
+<script type="modulepreload" src="./sparse_autoencoder.js"></script>
+<script type="modulepreload" src="./features_names.js"></script>
+<script type="modulepreload" src="./main.js"></script>
+<link rel="preload" href="./model.bin" as="fetch" type="application/octet-stream" crossorigin>
+
+</head>
+<body>
+
+<div style="border: black solid 0.1em; padding: 1em; border-radius: 1em; margin-top: 1em; width:fit-content">
+	<h1>500 Sliders!</h1>
+	<h2>Made by Qualia with &lt3</h2>
+	<p>Uses a sparse autoencoder I trained on <a href="https://openpsychometrics.org/tests/characters/data/" target="_blank">this</a> dataset.</p>
+	<ol>
+	<li>Click boxes for traits that interest you</li>
+	<li>Move sliders on those to where you see yourself</li>
+	<li>See what other sliders say about your personality</li>
+	</ol>
+	<button onclick="this.parentElement.style.display = 'none'">Close this message!</button>
+</div>
+<p id="LOADING_MESSAGE">Loading :D</p>
+<noscript>Requires js Sorry :(</noscript>
+
+<main id="CONTENT_MAIN">
+</main>
+
+<script type="module" src="./main.js"></script>
+</body>
+</html>

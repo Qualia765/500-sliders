@@ -1,0 +1,11 @@
+# 500 Sliders
+- a website with 500 sliders
+- sliding one will slide the others
+- each slider means a different thing
+- the sliders that move predict what you would have answered them despite not yet answering them. lok a ghost. ooh spooky
+- it uses a autoencoder that transforms a layer of 1000 neurons (500 values + 500 masks) into a small latent space then back to predicted 500 values
+- it probably doesn't need to be an autoencoder to do its job probably, but the bottleneck reduces overfitting (to be clear i don't think this is a good way to reduce overfitting).
+- but it works so i don't feel like changing it now
+- the dataset is from dataset [here](https://openpsychometrics.org/tests/characters/data/) which is the `means.csv` and `std.csv` and part of `web/feature_names.js`.
+- all the ML stuff and the color selection for the features is AI vibe coded slop, everything else in the frontend is handmade so it looks nice exactly the i want it to
+- the training stuff is in `/src` the website stuff is in `/web`

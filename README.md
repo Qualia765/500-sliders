@@ -7,6 +7,5 @@
 - it probably doesn't need to be an autoencoder to do its job probably, but the bottleneck reduces overfitting (to be clear i don't think this is a good way to reduce overfitting).
 - but it works so i don't feel like changing it now
 - the dataset is from dataset [here](https://openpsychometrics.org/tests/characters/data/) which is the `means.csv` and `std.csv` and part of `web/feature_names.js`.
-- all the ML stuff and the color selection for the features is AI vibe coded slop, but of the stuff in the frontend is handmade so it looks nice exactly the i want it to
 - the training stuff is in `/src` the website stuff is in `/web`
 - to use the ML stuff please have `uv` installed and use `uv venv` (obv duh) then you can use a CLI with `uv run src/main.py -h` and it will show u da options

@@ -51,8 +51,10 @@ main {
 
 slider-container {
 	--mix-color: color-mix(in oklch, var(--color2) var(--color-mix), var(--color1));
+	--lighter-color: color-mix(in oklab, #fffafa 90%, var(--mix-color));
 	--light-color: color-mix(in oklab, #fff8f8 80%, var(--mix-color));
 	--lightish-color: color-mix(in oklab, #fff8f8 60%, var(--mix-color));
+	--lightishish-color: color-mix(in oklab, #fff8f8 40%, var(--mix-color));
 	--dark-color: color-mix(in oklab, #003 10%, var(--mix-color));
 	background-color: color-mix(var(--mix-color) var(--user-selected), var(--light-color));
 	border: color-mix(var(--dark-color) var(--user-selected), var(--lightish-color)) solid calc(var(--shrink-em) * 0.15);
@@ -73,6 +75,11 @@ input[type="range"] {
 	appearance: none;
 	background: transparent;
 	width: calc(var(--shrink-em) * 20);
+	cursor: pointer;
+}
+
+input[type=range]:disabled {
+	cursor: default;
 }
 
 input[type="range"]:focus {
@@ -84,6 +91,8 @@ input[type="range"]::-moz-range-track {
 	width: calc(100%- 0.6em);
 	height: 0.5em;
 	background-image: linear-gradient(to right in oklch, var(--color1), var(--color2));
+	background-size: calc(100% + 0.3em) calc(100% + 0.3em);
+	background-position: -0.15em -0.15em;
 	border: #0008 solid 0.15em;
 	border-radius: 0.5em;
 }
@@ -99,28 +108,24 @@ input[type="range"]::-moz-range-thumb {
 	background: #eee8;
 	border-radius: 0.5em;
 	border: #222 solid 0.15em;
-	cursor: pointer;
 }
 
-input[type="range"]:hover::-webkit-slider-thumb,
-input[type="range"]:hover::-moz-range-thumb {
+input[type="range"]::-webkit-slider-thumb:hover,
+input[type="range"]::-moz-range-thumb:hover {
 	background: #fffb;
 	border: #111 solid 0.15em;
 }
 
 input[type="range"]:disabled::-webkit-slider-runnable-track,
 input[type="range"]:disabled::-moz-range-track {
-	background: linear-gradient(to right in oklch, color-mix(var(--color1) 50%), color-mix(var(--color2) 50%));
-	background-size: calc(100% + 0.3em) calc(100% + 0.3em);
-	background-position: -0.15em -0.15em;
-	border: #0004 solid 0.15em;
+	background-image: linear-gradient(to right in oklch, color-mix(var(--color1) 50%), color-mix(var(--color2) 50%));
+	border-color: #0004;
 }
 
 input[type="range"]:disabled::-webkit-slider-thumb,
 input[type="range"]:disabled::-moz-range-thumb {
 	background: #eee4;
-	border: #2228 solid 0.15em;
-	cursor: default;
+	border-color: #2228;
 }
 
 
@@ -133,7 +138,7 @@ input[type="checkbox"] {
 	width: 1.5em;
 	height: 1.5em;
 	background: #fff;
-	border: #aaa solid calc(var(--shrink-em) * 0.15);
+	border: var(--lightishish-color) solid calc(var(--shrink-em) * 0.15);
 	border-radius: 0.5em;
 	cursor: pointer;
 	overflow: hidden;
@@ -143,7 +148,7 @@ input[type="checkbox"]::before {
 	content: "";
 	width: 1em;
 	height: 1em;
-	background: var(--dark-color);
+	background-color: var(--dark-color);
 	clip-path: polygon(25% 0%, 75% 0%, 75% 15%, 65% 15%, 65% 55%, 90% 55%, 90% 70%, 57% 70%, 57% 100%, 43% 100%, 43% 70%, 10% 70%, 10% 55%, 35% 55%, 35% 15%, 25% 15%);
 	transform: translate(0.4em, -0.8em) rotate(70deg);
 	opacity: 0;
@@ -151,7 +156,7 @@ input[type="checkbox"]::before {
 }
 
 input[type="checkbox"]:checked {
-	background: var(--lightish-color);
+	background: var(--lighter-color);
 	border-color: var(--dark-color);
 }
 
@@ -162,12 +167,21 @@ input[type="checkbox"]:checked::before {
 }
 
 input[type="checkbox"]:hover {
+	border-color: var(--mix-color);
+	background-color: var(--lightishish-color);
+}
+
+input[type="checkbox"]:hover:checked {
 	border-color: var(--dark-color);
 	background-color: var(--mix-color);
 }
 
 input[type="checkbox"]:hover::before {
-	background-color: var(--light-color);
+	background-color: #fff;
+}
+
+input[type="checkbox"]:hover:checked::before {
+	background-color: var(--lighter-color);
 }
 
 input[type="checkbox"]:focus-visible {

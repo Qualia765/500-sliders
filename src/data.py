@@ -38,21 +38,27 @@ class Dataset:
         return torch.cat([torch.where(mask, values, self.fill), mask.float()], -1)
 
     def sample(
-        self, n: int, keep: tuple[float, float], generator: torch.Generator | None = None
+        self,
+        n: int,
+        keep: tuple[float, float],
+        generator: torch.Generator | None = None,
     ) -> tuple[Tensor, Tensor, Tensor]:
         """Returns (encoder input, clean means, object indices) for n random objects.
         Each sample draws its own keep rate, log-uniform between keep[0] and keep[1]."""
-        idx = torch.randint(len(self.labels), (n,), device=self.device, generator=generator)
+        idx = torch.randint(
+            len(self.labels), (n,), device=self.device, generator=generator
+        )
         low, high = math.log(keep[0]), math.log(keep[1])
         draw = torch.rand(n, 1, device=self.device, generator=generator)
         values = self.noisy(idx, generator)
-        mask = torch.rand(values.shape, device=self.device, generator=generator) < torch.exp(
-            low + (high - low) * draw
-        )
+        mask = torch.rand(
+            values.shape, device=self.device, generator=generator
+        ) < torch.exp(low + (high - low) * draw)
         return self.sparse_input(values, mask), self.means[idx], idx
 
     def distances(self, vec: Tensor) -> tuple[Tensor, Tensor]:
         """Per-object (mean squared error, mean squared z-score) of a 500D vector.
-        A z-score distance of ~1 means the vector sits about one std from the object's mean."""
+        A z-score distance of ~1 means the vector sits about one std from the object's mean.
+        """
         diff = vec - self.means
         return diff.pow(2).mean(1), (diff / self.stds.clamp_min(MIN_STD)).pow(2).mean(1)

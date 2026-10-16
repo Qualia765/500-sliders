@@ -13,13 +13,18 @@ class Autoencoder(nn.Module):
         super().__init__()
         self.latent = latent
         self.encoder = nn.Sequential(
-            nn.Linear(2 * features, 512), nn.ReLU(),
-            nn.Linear(512, 128), nn.ReLU(),
-            nn.Linear(128, latent), nn.Tanh(),
+            nn.Linear(2 * features, 512),
+            nn.ReLU(),
+            nn.Linear(512, 128),
+            nn.ReLU(),
+            nn.Linear(128, latent),
+            nn.Tanh(),
         )
         self.decoder = nn.Sequential(
-            nn.Linear(latent, 128), nn.ReLU(),
-            nn.Linear(128, features), nn.Tanh(),
+            nn.Linear(latent, 128),
+            nn.ReLU(),
+            nn.Linear(128, features),
+            nn.Tanh(),
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -36,7 +41,8 @@ class Autoencoder(nn.Module):
     def save_web(self, path: str, fill: torch.Tensor) -> None:
         """Format read by sparse-autoencoder.js: a uint32 header length, a JSON header
         ({array name: shape}, space-padded to a multiple of 4 bytes), then every array as
-        little-endian float32 in header order. `fill` is the per-feature average used for dropped values."""
+        little-endian float32 in header order. `fill` is the per-feature average used for dropped values.
+        """
         arrays = {"fill": fill, **self.state_dict()}
         header = json.dumps({k: list(v.shape) for k, v in arrays.items()}).encode()
         header += b" " * (-len(header) % 4)
@@ -48,6 +54,9 @@ class Autoencoder(nn.Module):
     @classmethod
     def from_npz(cls, path: str) -> "Autoencoder":
         arrays = np.load(path)
-        model = cls(arrays["encoder.0.weight"].shape[1] // 2, arrays["encoder.4.weight"].shape[0])
+        model = cls(
+            arrays["encoder.0.weight"].shape[1] // 2,
+            arrays["encoder.4.weight"].shape[0],
+        )
         model.load_state_dict({k: torch.from_numpy(arrays[k]) for k in arrays.files})
         return model

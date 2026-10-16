@@ -1,169 +1,174 @@
 html,
 body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    max-width: 100%;
-    --shrink-em: min(max(1em, hypot(0.2svw, 0.2svh)), calc(5svw - 0.1em));
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+	--shrink-em: min(max(1em, hypot(0.2svw, 0.2svh)), calc(5svw - 0.1em));
 }
 
 body {
-    display: grid;
-    place-items: center;
-    min-height: 100dvh;
-    box-sizing: border-box;
+	display: grid;
+	place-items: center;
+	min-height: 100dvh;
+	box-sizing: border-box;
 }
 
 main {
-    width: calc(100% - var(--shrink-em) * 2);
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    gap: var(--shrink-em);
-    padding: var(--shrink-em);
+	width: calc(100% - var(--shrink-em) * 2);
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	gap: var(--shrink-em);
+	padding: var(--shrink-em);
 }
 
 @property --user-selected {
-    syntax: '<percentage>';
-    inherits: true;
-    initial-value: 0%;
+	syntax: '<percentage>';
+	inherits: true;
+	initial-value: 0%;
 }
 
 @property --color-mix {
-    syntax: '<percentage>';
-    inherits: true;
-    initial-value: 50%;
+	syntax: '<percentage>';
+	inherits: true;
+	initial-value: 50%;
 }
 
 @property --color1 {
-    syntax: '<color>';
-    inherits: true;
-    initial-value: #DDD;
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #DDD;
 }
 
 @property --color2 {
-    syntax: '<color>';
-    inherits: true;
-    initial-value: #DDD;
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #DDD;
 }
 
 slider-container {
-    --mix-color: color-mix(in oklch, var(--color2) var(--color-mix), var(--color1));
-    --light-color: color-mix(in oklab, #fff8f8 80%, var(--mix-color));
-    --lightish-color: color-mix(in oklab, #fff8f8 60%, var(--mix-color));
-    --dark-color: color-mix(in oklab, #003 10%, var(--mix-color));
-    background-color: color-mix(var(--mix-color) var(--user-selected), var(--light-color));
-    border: color-mix(var(--dark-color) var(--user-selected), var(--lightish-color)) solid calc(var(--shrink-em) * 0.15);
-    padding: var(--shrink-em);
-    border-radius: var(--shrink-em);
+	--mix-color: color-mix(in oklch, var(--color2) var(--color-mix), var(--color1));
+	--light-color: color-mix(in oklab, #fff8f8 80%, var(--mix-color));
+	--lightish-color: color-mix(in oklab, #fff8f8 60%, var(--mix-color));
+	--dark-color: color-mix(in oklab, #003 10%, var(--mix-color));
+	background-color: color-mix(var(--mix-color) var(--user-selected), var(--light-color));
+	border: color-mix(var(--dark-color) var(--user-selected), var(--lightish-color)) solid calc(var(--shrink-em) * 0.15);
+	padding: var(--shrink-em);
+	border-radius: var(--shrink-em);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: calc(var(--shrink-em) * 0.5);
 }
 
+slider-container label:last-child {
+	margin-left: auto;
+}
 
 input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    background: transparent;
-    width: calc(var(--shrink-em) * 20);
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+	width: calc(var(--shrink-em) * 20);
 }
 
 input[type="range"]:focus {
-    outline: none;
+	outline: none;
 }
 
 input[type="range"]::-webkit-slider-runnable-track,
 input[type="range"]::-moz-range-track {
-    width: calc(100%- 0.6em);
-    height: 0.5em;
-    background-image: linear-gradient(to right in oklch, var(--color1), var(--color2));
-    border: #0008 solid 0.15em;
-    border-radius: 0.5em;
+	width: calc(100%- 0.6em);
+	height: 0.5em;
+	background-image: linear-gradient(to right in oklch, var(--color1), var(--color2));
+	border: #0008 solid 0.15em;
+	border-radius: 0.5em;
 }
 
 input[type="range"]::-moz-range-progress {
-    background: transparent;
+	background: transparent;
 }
 
 input[type="range"]::-webkit-slider-thumb,
 input[type="range"]::-moz-range-thumb {
-    width: 0.5em;
-    height: 2em;
-    background: #eee8;
-    border-radius: 0.5em;
-    border: #222 solid 0.15em;
-    cursor: pointer;
+	width: 0.5em;
+	height: 2em;
+	background: #eee8;
+	border-radius: 0.5em;
+	border: #222 solid 0.15em;
+	cursor: pointer;
 }
 
 input[type="range"]:hover::-webkit-slider-thumb,
 input[type="range"]:hover::-moz-range-thumb {
-    background: #fffb;
-    border: #111 solid 0.15em;
+	background: #fffb;
+	border: #111 solid 0.15em;
 }
 
 input[type="range"]:disabled::-webkit-slider-runnable-track,
 input[type="range"]:disabled::-moz-range-track {
-        background-image: linear-gradient(to right in oklch, color-mix(var(--color1) 50%), color-mix(var(--color2) 50%));
-        border: #0004 solid 0.15em;
+	background-image: linear-gradient(to right in oklch, color-mix(var(--color1) 50%), color-mix(var(--color2) 50%));
+	border: #0004 solid 0.15em;
 }
 
 input[type="range"]:disabled::-webkit-slider-thumb,
 input[type="range"]:disabled::-moz-range-thumb {
-    background: #eee4;
-    border: #2228 solid 0.15em;
+	background: #eee4;
+	border: #2228 solid 0.15em;
+	cursor: default;
 }
 
 
 input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-  margin-right: var(--shrink-em);
-  display: inline-grid;
-  place-content: center;
-  width: 1.5em;
-  height: 1.5em;
-  background: #fff;
-  border: #aaa solid calc(var(--shrink-em) * 0.15);
-  border-radius: 0.5em;
-  cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+	display: inline-grid;
+	place-content: center;
+	width: 1.5em;
+	height: 1.5em;
+	background: #fff;
+	border: #aaa solid calc(var(--shrink-em) * 0.15);
+	border-radius: 0.5em;
+	cursor: pointer;
+	overflow: hidden;
 }
 
 input[type="checkbox"]::before {
-  content: "";
-  width: 1em;
-  height: 1em;
-  background: var(--dark-color);
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  transform: scale(0);
-  transition: transform 0.15s ease-out;
+	content: "";
+	width: 1em;
+	height: 1em;
+	background: var(--dark-color);
+	clip-path: polygon(25% 0%, 75% 0%, 75% 15%, 65% 15%, 65% 55%, 90% 55%, 90% 70%, 57% 70%, 57% 100%, 43% 100%, 43% 70%, 10% 70%, 10% 55%, 35% 55%, 35% 15%, 25% 15%);
+	transform: translate(0.4em, -0.8em) rotate(70deg);
+	opacity: 0;
+	transition: transform 0.2s cubic-bezier(.55,.63,.63,-0.42), opacity 0.2s cubic-bezier(1,0,1,0);
 }
 
 input[type="checkbox"]:checked {
-  background: var(--lightish-color);
-  border-color: var(--dark-color);
+	background: var(--lightish-color);
+	border-color: var(--dark-color);
 }
 
 input[type="checkbox"]:checked::before {
-  transform: scale(1);
+	transform: translate(0, 0) rotate(30deg);
+	opacity: 1;
+	transition: transform 0.25s cubic-bezier(.77,1.71,.65,.81), opacity 0.25s cubic-bezier(0,1,0,1);
 }
 
 input[type="checkbox"]:hover {
-  border-color: var(--dark-color);
-  background-color: var(--mix-color);
+	border-color: var(--dark-color);
+	background-color: var(--mix-color);
 }
 
 input[type="checkbox"]:hover::before {
-  background-color: var(--light-color);
+	background-color: var(--light-color);
 }
 
 input[type="checkbox"]:focus-visible {
-  outline: #222 solid 0.15em;
-  outline-offset: 0.15em;
-}
-
-input[type="checkbox"]:disabled {
-  opacity: 0.5;
-  border-color: #2228;
-  cursor: not-allowed;
+	outline: #222 solid 0.15em;
+	outline-offset: 0.15em;
 }

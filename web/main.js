@@ -119,7 +119,7 @@ function main() {
 		LOADING_MESSAGE.remove();
 		const model = val;
 
-		const debouncedReEval = debounce(() => reEval(model, sliders), 100);
+		const debouncedReEval = debounce(() => reEval(model, sliders), 150);
 
 		for (let i=0; i<500; i++) {
 			const slider = new Slider(i, debouncedReEval);

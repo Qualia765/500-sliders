@@ -50,6 +50,7 @@ main {
 }
 
 slider-container {
+	will-change: --color-mix; /*idk if this helps or not*/
 	--mix-color: color-mix(in oklch, var(--color2) var(--color-mix), var(--color1));
 	--lighter-color: color-mix(in oklab, #fffafa 90%, var(--mix-color));
 	--light-color: color-mix(in oklab, #fff8f8 80%, var(--mix-color));

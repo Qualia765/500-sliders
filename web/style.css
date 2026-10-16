@@ -185,6 +185,7 @@ input[type="checkbox"]:hover::before {
 
 input[type="checkbox"]:hover:checked {
 	background-color: var(--mix-color);
+	border-color: var(--dark-color);
 }
 
 input[type="checkbox"]:hover:checked::before {
